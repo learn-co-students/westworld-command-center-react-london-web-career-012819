@@ -1,10 +1,13 @@
 import React from 'react';
 import '../stylesheets/Area.css'
+import { RENAME } from './constants.js'
 
-const Area = () => (
 
-  <div className='area' id={/* Pass in the area name here to make sure this is styled correctly */}>
-    <h3 className='labels'>{/* Don't just pass in the name from the data...clean that thing up */}</h3>
+
+const Area = ({id, name, limit, auth_req}) => (
+
+  <div className='area' id={name}>
+    <h3 className='labels'>{RENAME(name)}</h3>
 
     {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
 

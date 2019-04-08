@@ -26,13 +26,13 @@ const LogPanel = () => {
       </pre>
       
       {/* Button below is the Activate All/Decommisssion All button */}
-      <Button
+      {/* <Button
         fluid
         color={"red"}
         {/* This isn't always going to be the same color...*/}
         content={"ACTIVATE ALL"}
         {/* Should the button always read "ACTIVATE ALL"? When should it read "DECOMMISSION ALL"? */}
-      />
+      /> */}
     </Segment>
   )
 }
