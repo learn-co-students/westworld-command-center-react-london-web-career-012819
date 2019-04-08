@@ -5,11 +5,6 @@ import { RENAME } from './constants.js'
 
 class HostInfo extends Component {
 
-  
-
-
-
-
   dropdownOptions = () => {
     return this.props.areas.map(area => ({key: area.name, text: RENAME(area.name), value: area.name}))
   }
@@ -18,10 +13,6 @@ class HostInfo extends Component {
     
     this.props.updateHostArea(this.props.host.id, value)
   }
-
-
-
-
 
   render(){
     return (

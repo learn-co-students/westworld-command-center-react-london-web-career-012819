@@ -7,7 +7,7 @@ const WestworldMap = (props) => {
 
   return (
     <Segment id="map" >
-      {props.areas.map(area => <Area {...area} />)}
+      {props.areas.map(area => <Area area={area} hosts={props.hosts} handleClick={props.handleClick}  />)}
     </Segment>
   )
 }

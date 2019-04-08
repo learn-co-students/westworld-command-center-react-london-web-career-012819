@@ -10,7 +10,7 @@ const ColdStorage = (props) => (
     <Segment compact>
 
       {/* Cold Storage contains hosts....but how? Directly? Or is there something else we could use to contain them... */}
-      <HostList hosts={props.hosts} handleClick={props.handleClick} selectedHost={props.selectedHost}/>
+      <HostList parent="ColdStorage" hosts={props.hosts} handleClick={props.handleClick} selectedHost={props.selectedHost}/>
 
     </Segment>
   </Segment.Group>

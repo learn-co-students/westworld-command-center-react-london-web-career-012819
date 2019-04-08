@@ -15,7 +15,8 @@ class App extends Component {
 
   state = {
     areas: [],
-    hosts: []
+    hosts: [],
+    selectedHost: null
   }
 
   componentDidMount(){
@@ -26,6 +27,12 @@ class App extends Component {
     fetch(api_url + "hosts")
       .then(resp => resp.json())
       .then(hosts => this.setState({hosts}))
+  }
+
+  handleClick = (id) => {
+    this.setState({
+      selectedHost: id
+    })
   }
 
   updateHostArea = (id, area) => {
@@ -62,8 +69,8 @@ class App extends Component {
     return (
       <Segment id='app'>
         {/* What components should go here? Check out Checkpoint 1 of the Readme if you're confused */}
-        <WestworldMap areas={this.state.areas} />
-        <Headquarters hosts={this.state.hosts} toggle={this.toggle} areas={this.state.areas} updateHostArea={this.updateHostArea}/>
+        <WestworldMap selectedHost={this.state.selectedHost} areas={this.state.areas} hosts={this.state.hosts} handleClick={this.handleClick} />
+        <Headquarters selectedHost={this.state.selectedHost} hosts={this.state.hosts} toggle={this.toggle} areas={this.state.areas} updateHostArea={this.updateHostArea} handleClick={this.handleClick} />
       </Segment>
     )
   }

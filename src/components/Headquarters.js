@@ -8,15 +8,6 @@ import LogPanel from './LogPanel'
 
 class Headquarters extends Component {
   // Remember, there's many ways to do this. This doesn't have to be a class component. It's up to you.
-  state = {
-    selectedHost: null
-  }
-
-  handleClick = (id) => {
-    this.setState({
-      selectedHost: id
-    })
-  }
 
   findSelectedHost = (id) => {
     return this.props.hosts.find(host => host.id === id)
@@ -30,12 +21,12 @@ class Headquarters extends Component {
       <Grid celled='internally'>
         <Grid.Column width={8}>
 
-          <ColdStorage hosts={this.props.hosts} handleClick={this.handleClick} selectedHost={this.state.selectedHost}/>
+          <ColdStorage hosts={this.props.hosts} handleClick={this.props.handleClick} selectedHost={this.props.selectedHost}/>
 
         </Grid.Column>
         <Grid.Column width={5}>
 
-          <Details theChosenOne={this.findSelectedHost(this.state.selectedHost)} selectedHost={this.state.selectedHost} toggle={this.props.toggle}  areas={this.props.areas} updateHostArea={this.props.updateHostArea}/>
+          <Details theChosenOne={this.findSelectedHost(this.props.selectedHost)} selectedHost={this.props.selectedHost} toggle={this.props.toggle}  areas={this.props.areas} updateHostArea={this.props.updateHostArea}/>
 
         </Grid.Column>
         <Grid.Column width={3}>
