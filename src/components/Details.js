@@ -13,7 +13,7 @@ const Details = (props) => {
   return(
     <Segment id="details" className="HQComps">
     {props.selectedHost ?
-      < HostInfo host={props.theChosenOne} toggle={props.toggle} areas={props.areas} updateHostArea={props.updateHostArea}/>
+      < HostInfo tooManyBro={props.tooManyBro} hosts={props.hosts} host={props.theChosenOne} toggle={props.toggle} areas={props.areas} updateHostArea={props.updateHostArea}/>
       :
       renderSomething()
     }

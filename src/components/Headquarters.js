@@ -13,9 +13,6 @@ class Headquarters extends Component {
     return this.props.hosts.find(host => host.id === id)
   }
 
-  
-
-
   render(){
     return(
       <Grid celled='internally'>
@@ -26,12 +23,12 @@ class Headquarters extends Component {
         </Grid.Column>
         <Grid.Column width={5}>
 
-          <Details theChosenOne={this.findSelectedHost(this.props.selectedHost)} selectedHost={this.props.selectedHost} toggle={this.props.toggle}  areas={this.props.areas} updateHostArea={this.props.updateHostArea}/>
+          <Details tooManyBro={this.props.tooManyBro} hosts={this.props.hosts} theChosenOne={this.findSelectedHost(this.props.selectedHost)} selectedHost={this.props.selectedHost} toggle={this.props.toggle}  areas={this.props.areas} updateHostArea={this.props.updateHostArea}/>
 
         </Grid.Column>
         <Grid.Column width={3}>
 
-          <LogPanel />
+          <LogPanel log={this.props.log} activateToggle={this.props.activateToggle} toggleAll={this.props.toggleAll}/>
 
         </Grid.Column>
       </Grid>

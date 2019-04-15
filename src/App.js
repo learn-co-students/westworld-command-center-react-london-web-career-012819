@@ -3,6 +3,8 @@ import './stylesheets/App.css'
 import { Segment } from 'semantic-ui-react';
 import WestworldMap from './components/WestworldMap';
 import Headquarters from './components/Headquarters'
+import { Log } from './services/Log';
+import { RENAME } from './components/constants'
 
 const api_url = "http://localhost:4000/"
 
@@ -16,7 +18,9 @@ class App extends Component {
   state = {
     areas: [],
     hosts: [],
-    selectedHost: null
+    selectedHost: null,
+    activateToggle: true,
+    log: []
   }
 
   componentDidMount(){
@@ -40,14 +44,13 @@ class App extends Component {
       const newHosts = this.state.hosts.map(host => {
   
         if(host.id === id){
+           this.setState({log: [Log.notify(`${host.firstName} set in area ${RENAME(area)}`), ...this.state.log]})
            return {...host, area: area}
         } else {
             return host
         }
     })
-      this.setState({
-        hosts: newHosts
-      })
+      this.setState({ hosts: newHosts })
   }
 
   toggle = (id) => {
@@ -55,7 +58,12 @@ class App extends Component {
     const newHosts = this.state.hosts.map(host => {
 
       if(host.id === id){
-         return {...host, active: !host.active}
+        host.active ?
+        this.setState({log: [Log.notify(`Decommisioned ${host.firstName}`), ...this.state.log]})
+        :
+        this.setState({log: [Log.warn(`Activated ${host.firstName}`), ...this.state.log]})
+        
+        return {...host, active: !host.active}
       } else {
           return host
       }
@@ -65,12 +73,27 @@ class App extends Component {
     })
   }
 
+  toggleAll = () => {
+    this.state.activateToggle ?
+    this.setState({log: [Log.warn("Activating all hosts!"), ...this.state.log]})
+    :
+    this.setState({log: [Log.notify("Decommissiong all hosts."), ...this.state.log]})
+    const hosts = this.state.hosts.map(host => {
+      return {...host, active: this.state.activateToggle}})
+    this.setState({hosts, activateToggle: !this.state.activateToggle})
+  }
+
+  tooManyBro = (name, area) => {   
+    this.setState({log: [Log.error(`Too many hosts. Cannot add ${name} to ${area}`), ...this.state.log]})
+  }
+
+
   render(){
     return (
       <Segment id='app'>
         {/* What components should go here? Check out Checkpoint 1 of the Readme if you're confused */}
         <WestworldMap selectedHost={this.state.selectedHost} areas={this.state.areas} hosts={this.state.hosts} handleClick={this.handleClick} />
-        <Headquarters selectedHost={this.state.selectedHost} hosts={this.state.hosts} toggle={this.toggle} areas={this.state.areas} updateHostArea={this.updateHostArea} handleClick={this.handleClick} />
+        <Headquarters tooManyBro={this.tooManyBro} log={this.state.log} activateToggle={this.state.activateToggle} toggleAll={this.toggleAll} selectedHost={this.state.selectedHost} hosts={this.state.hosts} toggle={this.toggle} areas={this.state.areas} updateHostArea={this.updateHostArea} handleClick={this.handleClick} />
       </Segment>
     )
   }

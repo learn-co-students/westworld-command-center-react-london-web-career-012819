@@ -9,8 +9,6 @@ function filterHosts (area, hosts) {
 }
 
 const Area = (props) => (
- 
-    
 
   <div className='area' id={props.area.name}>
     <h3 className='labels'>{RENAME(props.area.name)}</h3>

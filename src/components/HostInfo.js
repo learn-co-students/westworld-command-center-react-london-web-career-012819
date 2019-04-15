@@ -9,9 +9,17 @@ class HostInfo extends Component {
     return this.props.areas.map(area => ({key: area.name, text: RENAME(area.name), value: area.name}))
   }
 
+  areaCondition = (area) => {
+    const hotsList = this.props.hosts.filter(host => host.area === area)
+    return hotsList.length < 6
+  }
+
   handleChange = (e, {value}) => {
-    
-    this.props.updateHostArea(this.props.host.id, value)
+    if (this.areaCondition(value)){
+      this.props.updateHostArea(this.props.host.id, value) 
+    } else {
+      this.props.tooManyBro(this.props.host.firstName, value)
+    }
   }
 
   render(){
